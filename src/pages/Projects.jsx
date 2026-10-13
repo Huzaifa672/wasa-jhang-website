@@ -11,7 +11,7 @@ number: '01',
 title: 'Water Supply Improvement',
 description:
 'Improvement and development of water supply infrastructure to support reliable and efficient services for citizens.',
-status: 'Ongoing',
+status: 'Coming Soon',
 supervisor: 'Deputy Manager (xyz)',
 location: 'Jhang City',
 image: project1,

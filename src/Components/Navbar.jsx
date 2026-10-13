@@ -1,3 +1,4 @@
+
 import { useState } from 'react'
 import { Link, NavLink } from 'react-router-dom'
 
@@ -27,7 +28,6 @@ function Navbar() {
           <span className="font-medium tracking-wide">
             Government of Punjab
           </span>
-
           <span className="hidden text-sky-200 sm:block">
             Water & Sanitation Agency Jhang
           </span>
@@ -49,26 +49,66 @@ function Navbar() {
 
           <div className="min-w-0 flex-1 overflow-hidden">
             <div className="announcement-track flex w-max items-center">
-              <div className="flex shrink-0 items-center gap-8 pr-8 text-xs font-medium sm:text-sm">
-                <span>Water Treatment Plant Upgrade — Coming Soon</span>
-                <span aria-hidden="true" className="text-sky-200">◆</span>
-                <span>For queries and complaints, contact WASA Jhang.</span>
-                <span aria-hidden="true" className="text-sky-200">◆</span>
-              </div>
+              {[1, 2].map((copy) => (
+                <div
+                  key={copy}
+                  aria-hidden={copy === 2}
+                  className="flex shrink-0 items-center gap-8 pr-8 text-xs font-medium sm:text-sm"
+                >
+                  <Link
+                    to="/projects"
+                    tabIndex={copy === 2 ? -1 : 0}
+                    className="whitespace-nowrap transition hover:text-sky-200 hover:underline"
+                  >
+                    Water Treatment Plant Upgrade — Coming Soon
+                  </Link>
 
-              <div
-                aria-hidden="true"
-                className="flex shrink-0 items-center gap-8 pr-8 text-xs font-medium sm:text-sm"
-              >
-                <span>Water Treatment Plant Upgrade — Coming Soon</span>
-                <span className="text-sky-200">◆</span>
-                <span>For queries and complaints, contact WASA Jhang.</span>
-                <span className="text-sky-200">◆</span>
-              </div>
+                  <span aria-hidden="true" className="text-sky-200">
+                    ◆
+                  </span>
+
+                  <Link
+                    to="/notices"
+                    tabIndex={copy === 2 ? -1 : 0}
+                    className="whitespace-nowrap transition hover:text-sky-200 hover:underline"
+                  >
+                    Latest Notices — View Announcements
+                  </Link>
+
+                  <span aria-hidden="true" className="text-sky-200">
+                    ◆
+                  </span>
+
+                  <Link
+                    to="/notices"
+                    tabIndex={copy === 2 ? -1 : 0}
+                    className="whitespace-nowrap transition hover:text-sky-200 hover:underline"
+                  >
+                    Tender Announcements — Visit Notices
+                  </Link>
+
+                  <span aria-hidden="true" className="text-sky-200">
+                    ◆
+                  </span>
+
+                  <Link
+                    to="/contact"
+                    tabIndex={copy === 2 ? -1 : 0}
+                    className="whitespace-nowrap transition hover:text-sky-200 hover:underline"
+                  >
+                    For Queries and Complaints, Contact WASA Jhang
+                  </Link>
+
+                  <span aria-hidden="true" className="text-sky-200">
+                    ◆
+                  </span>
+                </div>
+              ))}
             </div>
           </div>
         </div>
       </section>
+
       {/* Main Header */}
       <div className="border-b border-slate-100 bg-white">
         <div className="mx-auto flex max-w-7xl items-center justify-between px-6 py-3">
@@ -79,18 +119,19 @@ function Navbar() {
             onClick={() => setMobileMenuOpen(false)}
           >
             {/* WASA Logo */}
-         <div className="flex h-24 w-24 shrink-0 items-center justify-center">
-  <img
-    src="/logo.png"
-    alt="WASA Jhang"
-    className="h-24 w-24 object-contain"
-  />
-</div>
+            <div className="flex shrink-0 items-center justify-center">
+              <img
+                src="/logo.jpg"
+                alt="WASA Jhang"
+                className="block h-24 w-24 shrink-0 object-contain"
+              />
+            </div>
+
+            {/* Website Name */}
             <div>
               <h1 className="text-lg font-bold leading-tight text-[#082F49] md:text-xl">
                 WASA Jhang
               </h1>
-
               <p className="text-[11px] font-medium text-slate-500 md:text-xs">
                 Water & Sanitation Agency
               </p>
@@ -108,7 +149,6 @@ function Navbar() {
                 {({ isActive }) => (
                   <>
                     {link.name}
-
                     {isActive && (
                       <span className="absolute -bottom-[17px] left-0 h-0.5 w-full rounded-full bg-gradient-to-r from-[#075985] to-[#0F766E]" />
                     )}
@@ -138,6 +178,7 @@ function Navbar() {
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
             className="rounded-md border border-slate-200 p-2 text-slate-700 transition hover:border-blue-200 hover:bg-sky-50 hover:text-blue-800 md:hidden"
             aria-label="Toggle navigation menu"
+            aria-expanded={mobileMenuOpen}
           >
             {mobileMenuOpen ? (
               <svg

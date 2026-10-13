@@ -326,7 +326,7 @@
 
                   <div className="p-3">
                     <span className="inline-block rounded-full bg-emerald-50 px-2 py-1 text-[10px] font-bold text-emerald-700">
-                      Ongoing
+                      Coming Soon 
                     </span>
 
                     <h3 className="mt-2 text-sm font-bold leading-5 text-[#082F49]">
