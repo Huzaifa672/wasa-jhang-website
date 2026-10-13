@@ -1,33 +1,40 @@
 const externalServices = {
-  domesticConnection: {
-    title: "New Domestic Connection",
-    url: "https://dastak.punjab.gov.pk/citizen/services",
-  },
+domesticConnection: {
+title: "New Domestic Connection",
+url: "https://cms-pwasa.wasalhr.pk/WaterConnection/Apply",
+},
 
-  commercialConnection: {
-    title: "New Commercial Connection",
-    url: "https://dastak.punjab.gov.pk/citizen/services",
-  },
+commercialConnection: {
+title: "New Commercial Connection",
+url: "https://cms-pwasa.wasalhr.pk/WaterConnection/Apply",
+},
 
-  registerComplaint: {
-    title: "Register Complaint",
-    url: "tel:1334",
-  },
+registerComplaint: {
+title: "Register Complaint",
+url: "https://cms-pwasa.wasalhr.pk/Complaints/Create",
+},
 
-  trackComplaint: {
-    title: "Track Complaint",
-    url: "https://crm.punjab.gov.pk/CmccPublic/TrackComplaint",
-  },
+trackComplaint: {
+title: "Track Complaint",
+url: "https://cms-pwasa.wasalhr.pk/Complaints",
+},
 
-  duplicateBill: {
-    title: "Duplicate Bill",
-    url: "#",
-  },
+billInformation: {
+title: "Bill Information",
+url: "#",
+comingSoon: true,
+},
 
-  helpline: {
-    title: "WASA Helpline",
-    url: "tel:1334",
-  },
+duplicateBill: {
+title: "Duplicate Bill",
+url: "#",
+comingSoon: true,
+},
+
+helpline: {
+title: "WASA Helpline",
+url: "tel:1334",
+},
 };
 
 export default externalServices;
