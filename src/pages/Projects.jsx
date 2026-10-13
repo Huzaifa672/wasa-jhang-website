@@ -5,32 +5,39 @@ import project2 from '../assets/project-2.webp'
 import project3 from '../assets/project-3.webp'
 
 function Projects() {
-  const projects = [
-    {
-      number: '01',
-      title: 'Water Supply Improvement',
-      description:
-        'Improvement and development of water supply infrastructure to support reliable and efficient services for citizens.',
-      status: 'Ongoing',
-      image: project1,
-    },
-    {
-      number: '02',
-      title: 'Sewerage Infrastructure Development',
-      description:
-        'Development and improvement of sewerage infrastructure to support better sanitation services and a cleaner environment.',
-      status: 'Ongoing',
-      image: project2,
-    },
-    {
-      number: '03',
-      title: 'Drainage Infrastructure Improvement',
-      description:
-        'Improvement of drainage infrastructure to support effective water management and better public sanitation conditions.',
-      status: 'Planned',
-      image: project3,
-    },
-  ]
+ const projects = [
+{
+number: '01',
+title: 'Water Supply Improvement',
+description:
+'Improvement and development of water supply infrastructure to support reliable and efficient services for citizens.',
+status: 'Ongoing',
+supervisor: 'Deputy Manager (xyz)',
+location: 'Jhang City',
+image: project1,
+},
+{
+number: '02',
+title: 'Sewerage Infrastructure Development',
+description:
+'Development and improvement of sewerage infrastructure, including sewer line installation, rehabilitation and sanitation improvements.',
+status: 'Ongoing',
+supervisor: 'Sub Engineer (xyz)',
+location: 'Jhang City',
+image: project2,
+},
+{
+number: '03',
+title: 'Drainage Infrastructure Improvement',
+description:
+'Improvement of drainage infrastructure to support effective water management and reduce waterlogging in urban areas.',
+status: 'Planned',
+supervisor: 'Assistant Director (xyz)',
+location: 'Jhang City',
+image: project3,
+},
+]
+
 
   return (
     <main className="min-h-screen bg-slate-50">
@@ -128,6 +135,40 @@ function Projects() {
                   <p className="text-sm leading-7 text-slate-600">
                     {project.description}
                   </p>
+```
+              <div className="mt-5 space-y-3 border-t border-slate-100 pt-4">
+                <div className="flex items-start gap-3">
+                  <span className="text-lg">👤</span>
+                  <div>
+                    <p className="text-xs font-semibold uppercase tracking-wide text-slate-500">
+                      Project Supervisor
+                    </p>
+                    <p className="mt-1 text-sm font-semibold text-slate-800">
+                    ```
+                <div className="flex items-start gap-3">
+                  <div className="flex h-16 w-16 shrink-0 items-center justify-center rounded-full border-2 border-dashed border-slate-300 bg-slate-50">
+                    <span className="text-xs font-medium text-slate-400">
+                      Photo
+                    </span>
+                  </div>
+
+                  <div className="pt-1">
+                    <p className="text-xs font-semibold uppercase tracking-wide text-slate-500">
+                      Project Supervisor
+                    </p>
+                    <p className="mt-1 text-sm font-semibold text-slate-800">
+                      {project.supervisor}
+                    </p>
+                  </div>
+                </div>
+```
+
+                      {project.location}
+                    </p>
+                  </div>
+                </div>
+              </div>
+```
 
                   <div className="mt-5 flex items-center gap-2 text-sm font-semibold text-[#075985]">
                     Project Information

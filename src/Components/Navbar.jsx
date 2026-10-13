@@ -34,6 +34,41 @@ function Navbar() {
         </div>
       </div>
 
+      {/* Scrolling Announcement Bar */}
+      <section
+        className="overflow-hidden bg-[#075985] text-white"
+        aria-label="Public announcements"
+      >
+        <div className="flex h-10 items-center">
+          <div className="z-10 flex h-full shrink-0 items-center gap-2 bg-[#061D33] px-3 sm:px-5">
+            <span aria-hidden="true">📢</span>
+            <span className="text-[10px] font-bold uppercase tracking-wider sm:text-xs">
+              Announcements
+            </span>
+          </div>
+
+          <div className="min-w-0 flex-1 overflow-hidden">
+            <div className="announcement-track flex w-max items-center">
+              <div className="flex shrink-0 items-center gap-8 pr-8 text-xs font-medium sm:text-sm">
+                <span>Water Treatment Plant Upgrade — Coming Soon</span>
+                <span aria-hidden="true" className="text-sky-200">◆</span>
+                <span>For queries and complaints, contact WASA Jhang.</span>
+                <span aria-hidden="true" className="text-sky-200">◆</span>
+              </div>
+
+              <div
+                aria-hidden="true"
+                className="flex shrink-0 items-center gap-8 pr-8 text-xs font-medium sm:text-sm"
+              >
+                <span>Water Treatment Plant Upgrade — Coming Soon</span>
+                <span className="text-sky-200">◆</span>
+                <span>For queries and complaints, contact WASA Jhang.</span>
+                <span className="text-sky-200">◆</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
       {/* Main Header */}
       <div className="border-b border-slate-100 bg-white">
         <div className="mx-auto flex max-w-7xl items-center justify-between px-6 py-3">

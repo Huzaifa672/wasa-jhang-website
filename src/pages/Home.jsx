@@ -1,12 +1,12 @@
-import { Link } from "react-router-dom";
-import heroImage from "../assets/hero.webp";
-import aboutImage from "../assets/about.webp";
-import project1Image from "../assets/project-1.webp";
-import project2Image from "../assets/project-2.webp";
-import project3 from "../assets/project-3.webp";
-function Home() {
+ import { Link } from "react-router-dom";
+ import heroImage from "../assets/hero.webp";
+ import aboutImage from "../assets/about.webp";
+ import project1Image from "../assets/project-1.webp";
+ import project2Image from "../assets/project-2.webp";
+ import project3 from "../assets/project-3.webp";
+ function Home() {
   return (
-    <main>
+ <main>
       {/* =====================================================
           HERO
       ===================================================== */}
@@ -385,10 +385,10 @@ function Home() {
                 </Link>
 
                {/* Project 3 */}
-<Link
+ <Link
   to="/projects"
   className="group overflow-hidden rounded-xl bg-white shadow-sm ring-1 ring-slate-200 transition hover:-translate-y-1 hover:shadow-md"
->
+ >
   <div className="h-[150px] overflow-hidden bg-slate-100">
     <img
       src={project3}
@@ -416,7 +416,7 @@ function Home() {
       View Project →
     </div>
   </div>
-</Link>
+ </Link>
 
               </div>
             </div>
@@ -533,7 +533,7 @@ function Home() {
         </div>
       </section>
      {/* BOTTOM INFORMATION SECTIONS */}
-<section className="bg-[#061D33] px-6 py-7">
+ <section className="bg-[#061D33] px-6 py-7">
   <div className="mx-auto max-w-7xl">
     <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
 
@@ -627,8 +627,8 @@ function Home() {
 
     </div>
   </div>
-</section>
-    </main>
+ </section>
+ </main>
   );
 }
 
