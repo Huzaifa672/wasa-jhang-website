@@ -1,3 +1,4 @@
+
 import { Link } from 'react-router-dom'
 import externalServices from '../data/externalServices'
 
@@ -60,7 +61,8 @@ function Services() {
       icon: '💧',
       title: 'Water Supply',
       description:
-        'Water supply information, public infrastructure and citizen assistance.',
+        'Water supply services and information will be available soon.',
+      comingSoon: true,
     },
     {
       number: '02',
@@ -124,13 +126,10 @@ function Services() {
 
   return (
     <main className="min-h-screen bg-slate-50 text-slate-800">
-
-      {/* ================= PAGE HEADER ================= */}
+      {/* PAGE HEADER */}
       <section className="relative overflow-hidden bg-gradient-to-br from-[#061D33] via-[#073B5C] to-[#075985] px-6 py-14 text-white md:py-16">
         <div className="pointer-events-none absolute -right-24 -top-24 h-72 w-72 rounded-full border border-white/10" />
-
         <div className="pointer-events-none absolute -bottom-32 left-10 h-64 w-64 rounded-full bg-teal-300/10 blur-3xl" />
-
         <div className="pointer-events-none absolute right-[12%] top-[8%] hidden select-none text-[210px] font-black leading-none text-white/5 lg:block">
           W
         </div>
@@ -138,7 +137,6 @@ function Services() {
         <div className="relative mx-auto max-w-7xl">
           <div className="flex items-center gap-3">
             <span className="h-px w-10 bg-teal-300" />
-
             <p className="text-xs font-bold uppercase tracking-[0.2em] text-sky-200">
               WASA Jhang
             </p>
@@ -155,14 +153,12 @@ function Services() {
         </div>
       </section>
 
-      {/* ================= ONLINE SERVICES ================= */}
+      {/* ONLINE SERVICES */}
       <section className="bg-white px-6 py-12 md:py-14">
         <div className="mx-auto max-w-7xl">
-
           <div className="max-w-3xl">
             <div className="flex items-center gap-3">
               <span className="h-px w-8 bg-teal-600" />
-
               <p className="text-xs font-bold uppercase tracking-[0.2em] text-teal-700">
                 Online Services
               </p>
@@ -179,7 +175,6 @@ function Services() {
           </div>
 
           <div className="mt-8 grid gap-5 md:grid-cols-2 lg:grid-cols-3">
-
             {onlineServices.map((service) =>
               service.disabled ? (
                 <div
@@ -260,9 +255,8 @@ function Services() {
 
                   <div className="absolute bottom-0 left-0 h-0.5 w-0 bg-gradient-to-r from-[#075985] to-[#0F766E] transition-all duration-300 group-hover:w-full" />
                 </a>
-              )
+              ),
             )}
-
           </div>
 
           <div className="mt-6 rounded-xl border border-sky-100 bg-sky-50 px-5 py-4">
@@ -274,18 +268,15 @@ function Services() {
               while WASA Jhang provides clear information and guidance.
             </p>
           </div>
-
         </div>
       </section>
 
-      {/* ================= CORE SERVICES ================= */}
+      {/* CORE SERVICES */}
       <section className="bg-slate-50 px-6 py-12 md:py-14">
         <div className="mx-auto max-w-7xl">
-
           <div className="max-w-3xl">
             <div className="flex items-center gap-3">
               <span className="h-px w-8 bg-teal-600" />
-
               <p className="text-xs font-bold uppercase tracking-[0.2em] text-teal-700">
                 WASA Jhang
               </p>
@@ -302,11 +293,14 @@ function Services() {
           </div>
 
           <div className="mt-8 grid gap-5 md:grid-cols-2 lg:grid-cols-3">
-
             {coreServices.map((service) => (
               <div
                 key={service.number}
-                className="group relative overflow-hidden rounded-xl border border-slate-200 bg-white p-6 shadow-sm transition duration-300 hover:-translate-y-1 hover:border-sky-200 hover:shadow-md"
+                className={`relative overflow-hidden rounded-xl border border-slate-200 p-6 shadow-sm ${
+                  service.comingSoon
+                    ? 'bg-slate-50'
+                    : 'group bg-white transition duration-300 hover:-translate-y-1 hover:border-sky-200 hover:shadow-md'
+                }`}
               >
                 <div className="flex items-center justify-between">
                   <div className="flex h-11 w-11 items-center justify-center rounded-lg bg-sky-50 text-xl">
@@ -318,6 +312,12 @@ function Services() {
                   </span>
                 </div>
 
+                {service.comingSoon && (
+                  <span className="mt-4 inline-flex rounded-full border border-slate-200 bg-slate-100 px-2.5 py-1 text-[10px] font-bold uppercase tracking-wide text-slate-500">
+                    Coming Soon
+                  </span>
+                )}
+
                 <h3 className="mt-5 text-xl font-bold text-[#082F49]">
                   {service.title}
                 </h3>
@@ -326,31 +326,35 @@ function Services() {
                   {service.description}
                 </p>
 
-                <Link
-                  to="/contact"
-                  className="mt-4 inline-flex text-sm font-bold text-[#075985]"
-                >
-                  Get Information →
-                </Link>
+                {service.comingSoon ? (
+                  <span className="mt-4 inline-flex text-sm font-bold text-slate-400">
+                    Currently Unavailable
+                  </span>
+                ) : (
+                  <Link
+                    to="/contact"
+                    className="mt-4 inline-flex text-sm font-bold text-[#075985]"
+                  >
+                    Get Information →
+                  </Link>
+                )}
 
-                <div className="absolute bottom-0 left-0 h-0.5 w-0 bg-[#0F766E] transition-all duration-300 group-hover:w-full" />
+                {!service.comingSoon && (
+                  <div className="absolute bottom-0 left-0 h-0.5 w-0 bg-[#0F766E] transition-all duration-300 group-hover:w-full" />
+                )}
               </div>
             ))}
-
           </div>
         </div>
       </section>
 
-      {/* ================= HOW SERVICES WORK ================= */}
+      {/* HOW SERVICES WORK */}
       <section className="border-y border-slate-200 bg-white px-6 py-12 md:py-14">
         <div className="mx-auto max-w-7xl">
-
           <div className="grid gap-8 md:grid-cols-2 md:items-center">
-
             <div>
               <div className="flex items-center gap-3">
                 <span className="h-px w-8 bg-teal-600" />
-
                 <p className="text-xs font-bold uppercase tracking-[0.2em] text-teal-700">
                   Simple Access
                 </p>
@@ -384,7 +388,6 @@ function Services() {
 
             <div className="rounded-2xl bg-[#082F49] p-6 shadow-lg md:p-8">
               <div className="space-y-5">
-
                 <div className="flex gap-4">
                   <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-white text-sm font-black text-[#075985]">
                     1
@@ -394,7 +397,6 @@ function Services() {
                     <h3 className="font-bold text-white">
                       Choose your service
                     </h3>
-
                     <p className="mt-1 text-sm leading-6 text-sky-100">
                       Identify the service you need.
                     </p>
@@ -412,10 +414,9 @@ function Services() {
                     <h3 className="font-bold text-white">
                       Open official platform
                     </h3>
-
                     <p className="mt-1 text-sm leading-6 text-sky-100">
-                      Open the relevant official Punjab or WASA system in a new
-                      tab.
+                      Open the relevant official Punjab or WASA system in a
+                      new tab.
                     </p>
                   </div>
                 </div>
@@ -431,29 +432,24 @@ function Services() {
                     <h3 className="font-bold text-white">
                       Complete your service
                     </h3>
-
                     <p className="mt-1 text-sm leading-6 text-sky-100">
                       Complete your application or request on the official
                       platform.
                     </p>
                   </div>
                 </div>
-
               </div>
             </div>
-
           </div>
         </div>
       </section>
 
-      {/* ================= FAQ ================= */}
+      {/* FAQ */}
       <section className="bg-slate-50 px-6 py-12 md:py-14">
         <div className="mx-auto max-w-7xl">
-
           <div className="max-w-3xl">
             <div className="flex items-center gap-3">
               <span className="h-px w-8 bg-teal-600" />
-
               <p className="text-xs font-bold uppercase tracking-[0.2em] text-teal-700">
                 FAQs
               </p>
@@ -469,7 +465,6 @@ function Services() {
           </div>
 
           <div className="mt-8 grid gap-4 md:grid-cols-2">
-
             {faqs.map((faq) => (
               <details
                 key={faq.question}
@@ -490,23 +485,19 @@ function Services() {
                 </p>
               </details>
             ))}
-
           </div>
         </div>
       </section>
 
-      {/* ================= CONTACT CTA ================= */}
+      {/* CONTACT CTA */}
       <section className="bg-white px-6 py-10 md:py-12">
         <div className="mx-auto max-w-7xl">
-
           <div className="relative overflow-hidden rounded-2xl bg-gradient-to-r from-[#082F49] to-[#075985] px-6 py-8 shadow-lg md:px-10 md:py-9">
-
             <div className="pointer-events-none absolute right-[-30px] top-[-70px] select-none text-[190px] font-black leading-none text-white/5">
               W
             </div>
 
             <div className="relative flex flex-col gap-5 md:flex-row md:items-center md:justify-between">
-
               <div>
                 <p className="text-xs font-bold uppercase tracking-[0.2em] text-teal-200">
                   Citizen Support
@@ -528,12 +519,10 @@ function Services() {
               >
                 Contact WASA Jhang →
               </Link>
-
             </div>
           </div>
         </div>
       </section>
-
     </main>
   )
 }

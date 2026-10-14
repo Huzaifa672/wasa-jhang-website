@@ -5,52 +5,49 @@ import project2 from '../assets/project-2.webp'
 import project3 from '../assets/project-3.webp'
 
 function Projects() {
- const projects = [
-{
-number: '01',
-title: 'Water Supply Improvement',
-description:
-'Improvement and development of water supply infrastructure to support reliable and efficient services for citizens.',
-status: 'Coming Soon',
-supervisor: 'Deputy Manager (xyz)',
-location: 'Jhang City',
-image: project1,
-},
-{
-number: '02',
-title: 'Sewerage Infrastructure Development',
-description:
-'Development and improvement of sewerage infrastructure, including sewer line installation, rehabilitation and sanitation improvements.',
-status: 'Ongoing',
-supervisor: 'Sub Engineer (xyz)',
-location: 'Jhang City',
-image: project2,
-},
-{
-number: '03',
-title: 'Drainage Infrastructure Improvement',
-description:
-'Improvement of drainage infrastructure to support effective water management and reduce waterlogging in urban areas.',
-status: 'Planned',
-supervisor: 'Assistant Director (xyz)',
-location: 'Jhang City',
-image: project3,
-},
-]
-
+  const projects = [
+    {
+      number: '01',
+      title: 'Water Supply Improvement',
+      description:
+        'Improvement and development of water supply infrastructure to support reliable and efficient services for citizens.',
+      status: 'Coming Soon',
+      supervisor: 'Deputy Manager (xyz)',
+      location: 'Jhang City',
+      image: project1,
+    },
+    {
+      number: '02',
+      title: 'Sewerage Infrastructure Development',
+      description:
+        'Development and improvement of sewerage infrastructure, including sewer line installation, rehabilitation and sanitation improvements.',
+      status: 'Ongoing',
+      supervisor: 'Sub Engineer (xyz)',
+      location: 'Jhang City',
+      image: project2,
+    },
+    {
+      number: '03',
+      title: 'Drainage Infrastructure Improvement',
+      description:
+        'Improvement of drainage infrastructure to support effective water management and reduce waterlogging in urban areas.',
+      status: 'Planned',
+      supervisor: 'Assistant Director (xyz)',
+      location: 'Jhang City',
+      image: project3,
+    },
+  ]
 
   return (
     <main className="min-h-screen bg-slate-50">
       {/* PAGE HEADER */}
       <section className="relative overflow-hidden bg-gradient-to-br from-[#061D33] via-[#073B5C] to-[#075985] px-6 py-12 text-white md:py-14">
         <div className="absolute -right-24 -top-24 h-72 w-72 rounded-full border border-white/10" />
-
         <div className="absolute -bottom-32 left-10 h-64 w-64 rounded-full bg-teal-300/10 blur-3xl" />
 
         <div className="relative mx-auto max-w-7xl">
           <div className="flex items-center gap-3">
             <span className="h-px w-10 bg-teal-300" />
-
             <p className="text-xs font-bold uppercase tracking-[0.2em] text-sky-200">
               WASA Jhang
             </p>
@@ -73,14 +70,13 @@ image: project3,
           <div className="max-w-2xl">
             <div className="flex items-center gap-3">
               <span className="h-px w-8 bg-teal-600" />
-
               <p className="text-xs font-bold uppercase tracking-[0.2em] text-teal-700">
-                Development & Improvement
+                Development &amp; Improvement
               </p>
             </div>
 
             <h2 className="mt-3 text-3xl font-bold tracking-tight text-slate-900 md:text-4xl">
-              Current & Planned Projects
+              Current &amp; Planned Projects
             </h2>
 
             <p className="mt-3 text-sm leading-7 text-slate-600 md:text-base">
@@ -92,7 +88,7 @@ image: project3,
           <div className="mt-9 grid gap-6 lg:grid-cols-3">
             {projects.map((project) => (
               <article
-                key={project.title}
+                key={project.number}
                 className="group overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-sm transition duration-300 hover:-translate-y-1 hover:border-sky-200 hover:shadow-xl"
               >
                 {/* PROJECT IMAGE */}
@@ -123,7 +119,6 @@ image: project3,
                     <p className="text-xs font-semibold uppercase tracking-wider text-sky-100">
                       WASA Jhang
                     </p>
-
                     <h3 className="mt-1 text-xl font-bold text-white">
                       {project.title}
                     </h3>
@@ -135,44 +130,44 @@ image: project3,
                   <p className="text-sm leading-7 text-slate-600">
                     {project.description}
                   </p>
-```
-              <div className="mt-5 space-y-3 border-t border-slate-100 pt-4">
-                <div className="flex items-start gap-3">
-                  <span className="text-lg">👤</span>
-                  <div>
-                    <p className="text-xs font-semibold uppercase tracking-wide text-slate-500">
-                      Project Supervisor
-                    </p>
-                    <p className="mt-1 text-sm font-semibold text-slate-800">
-                    ```
-                <div className="flex items-start gap-3">
-                  <div className="flex h-16 w-16 shrink-0 items-center justify-center rounded-full border-2 border-dashed border-slate-300 bg-slate-50">
-                    <span className="text-xs font-medium text-slate-400">
-                      Photo
-                    </span>
-                  </div>
 
-                  <div className="pt-1">
-                    <p className="text-xs font-semibold uppercase tracking-wide text-slate-500">
-                      Project Supervisor
-                    </p>
-                    <p className="mt-1 text-sm font-semibold text-slate-800">
-                      {project.supervisor}
-                    </p>
-                  </div>
-                </div>
-```
+                  <div className="mt-5 space-y-3 border-t border-slate-100 pt-4">
+                    {/* SUPERVISOR: HIDDEN ONLY FOR PROJECT 01 */}
+                    {project.number !== '01' && (
+                      <div className="flex items-start gap-3">
+                        <div className="flex h-16 w-16 shrink-0 items-center justify-center rounded-full border-2 border-dashed border-slate-300 bg-slate-50">
+                          <span className="text-xs font-medium text-slate-400">
+                            Photo
+                          </span>
+                        </div>
 
-                      {project.location}
-                    </p>
+                        <div className="pt-1">
+                          <p className="text-xs font-semibold uppercase tracking-wide text-slate-500">
+                            Project Supervisor
+                          </p>
+                          <p className="mt-1 text-sm font-semibold text-slate-800">
+                            {project.supervisor}
+                          </p>
+                        </div>
+                      </div>
+                    )}
+
+                    {/* PROJECT LOCATION */}
+                    <div className="flex items-start gap-3">
+                      <span className="text-lg">📍</span>
+                      <div className="pt-1">
+                        <p className="text-xs font-semibold uppercase tracking-wide text-slate-500">
+                          Project Location
+                        </p>
+                        <p className="mt-1 text-sm font-semibold text-slate-800">
+                          {project.location}
+                        </p>
+                      </div>
+                    </div>
                   </div>
-                </div>
-              </div>
-```
 
                   <div className="mt-5 flex items-center gap-2 text-sm font-semibold text-[#075985]">
                     Project Information
-
                     <span className="transition-transform duration-200 group-hover:translate-x-1">
                       →
                     </span>
@@ -230,4 +225,3 @@ image: project3,
 }
 
 export default Projects
-
