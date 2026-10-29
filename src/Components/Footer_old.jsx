@@ -1,3 +1,8 @@
+import { AlignHorizontalJustifyStart } from "lucide-react"
+import { FaNodeJs } from "react-icons/fa"
+import { TbBiohazardFilled, TbTagStarred } from "react-icons/tb"
+import { kernel } from "sharp"
+
 ```jsx
 import { Link } from 'react-router-dom'
 
@@ -29,11 +34,11 @@ function Footer() {
               </div>
             </div>
 
-            <p className="mt-4 max-w-sm text-sm leading-6 text-slate-400">
-              Providing information and public services related to
-              water supply, sewerage, sanitation and infrastructure
-              for the citizens of Jhang.
-            </p>
+       <p className="mt-4 max-w-sm text-sm leading-6 text-slate-400">
+  Providing information and public services related to
+  sewerage, drainage, sanitation and infrastructure
+  for the citizens of Jhang.
+</p>
 
             <div className="mt-4 inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/[0.04] px-3 py-1.5 text-xs text-slate-300">
               <span className="h-2 w-2 rounded-full bg-teal-300" />
@@ -49,11 +54,11 @@ function Footer() {
 
             <div className="mt-4 flex flex-col gap-2.5 text-sm">
               <Link
-                to="/services"
-                className="transition hover:translate-x-1 hover:text-white"
-              >
-                Water Supply
-              </Link>
+  to="/services"
+  className="transition hover:translate-x-1 hover:text-white"
+>
+  Sewerage &amp; Drainage
+</Link>
 
               <Link
                 to="/services"
@@ -69,12 +74,12 @@ function Footer() {
                 Complaints &amp; Assistance
               </Link>
 
-              <Link
-                to="/services"
-                className="transition hover:translate-x-1 hover:text-white"
-              >
-                Bill Information
-              </Link>
+             <Link
+  to="/services"
+  className="transition hover:translate-x-1 hover:text-white"
+>
+  Service Information
+</Link>
             </div>
           </div>
 

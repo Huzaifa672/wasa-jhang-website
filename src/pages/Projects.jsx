@@ -1,224 +1,178 @@
 
 import { Link } from 'react-router-dom'
-import project1 from '../assets/project-1.webp'
-import project2 from '../assets/project-2.webp'
-import project3 from '../assets/project-3.webp'
+
+const projects = [
+  {
+    id: 1,
+    title: 'Fire Hydrant Installation',
+    description:
+      'Providing and installation of fire hydrants at different locations under WASA Jhang.',
+    photos: [
+      {
+        src: '/projects/hydrant-1.jpeg',
+        alt: 'Fire hydrant project photo 1',
+        label: 'Installation View 1',
+      },
+      {
+        src: '/projects/hydrant-2.jpeg',
+        alt: 'Fire hydrant project photo 2',
+        label: 'Installation View 2',
+      },
+    ],
+  },
+  {
+    id: 2,
+    title: 'Civil Works — Disposal Stations',
+    description:
+      'Civil works associated with New Gadiyan Wala and Goghay Wala Disposal Stations, Jhang.',
+    groups: [
+      {
+        title: 'Boundary Wall & Generator Room',
+        status: 'Ongoing',
+        photos: [
+          {
+            src: '/projects/boundary-generator-before.jpeg',
+            alt: 'Boundary wall and generator room before work',
+            label: 'Before',
+          },
+          {
+            src: '/projects/boundary-generator-after.jpeg',
+            alt: 'Boundary wall and generator room during ongoing work',
+            label: 'After',
+          },
+        ],
+      },
+      {
+        title: 'Disposal Station Rehabilitation',
+        description:
+          'Rehabilitation and improvement works at WASA Jhang disposal stations.',
+        photos: [
+          {
+            src: '/projects/site-leveling-before.jpeg',
+            alt: 'Disposal station site before leveling and colour work',
+            label: 'Before',
+          },
+          {
+            src: '/projects/site-leveling-after.jpeg',
+            alt: 'Disposal station site after leveling and colour work',
+            label: 'After',
+          },
+        ],
+      },
+    ],
+  },
+]
+
+function ProjectPhoto({ photo }) {
+  return (
+    <div className="overflow-hidden rounded-lg border border-slate-200 bg-slate-50">
+      <img
+        src={photo.src}
+        alt={photo.alt}
+        loading="lazy"
+        className="h-44 w-full object-cover sm:h-52"
+      />
+      <div className="border-t border-slate-200 px-3 py-2 text-sm font-medium text-slate-600">
+        {photo.label}
+      </div>
+    </div>
+  )
+}
 
 function Projects() {
-  const projects = [
-    {
-      number: '01',
-      title: 'Water Supply Improvement',
-      description:
-        'Improvement and development of water supply infrastructure to support reliable and efficient services for citizens.',
-      status: 'Coming Soon',
-      supervisor: 'Deputy Manager (xyz)',
-      location: 'Jhang City',
-      image: project1,
-    },
-    {
-      number: '02',
-      title: 'Sewerage Infrastructure Development',
-      description:
-        'Development and improvement of sewerage infrastructure, including sewer line installation, rehabilitation and sanitation improvements.',
-      status: 'Ongoing',
-      supervisor: 'Sub Engineer (xyz)',
-      location: 'Jhang City',
-      image: project2,
-    },
-    {
-      number: '03',
-      title: 'Drainage Infrastructure Improvement',
-      description:
-        'Improvement of drainage infrastructure to support effective water management and reduce waterlogging in urban areas.',
-      status: 'Planned',
-      supervisor: 'Assistant Director (xyz)',
-      location: 'Jhang City',
-      image: project3,
-    },
-  ]
-
   return (
     <main className="min-h-screen bg-slate-50">
-      {/* PAGE HEADER */}
-      <section className="relative overflow-hidden bg-gradient-to-br from-[#061D33] via-[#073B5C] to-[#075985] px-6 py-12 text-white md:py-14">
-        <div className="absolute -right-24 -top-24 h-72 w-72 rounded-full border border-white/10" />
-        <div className="absolute -bottom-32 left-10 h-64 w-64 rounded-full bg-teal-300/10 blur-3xl" />
-
-        <div className="relative mx-auto max-w-7xl">
-          <div className="flex items-center gap-3">
-            <span className="h-px w-10 bg-teal-300" />
-            <p className="text-xs font-bold uppercase tracking-[0.2em] text-sky-200">
-              WASA Jhang
-            </p>
-          </div>
-
-          <h1 className="mt-4 text-4xl font-bold tracking-tight md:text-5xl">
+      <section className="bg-gradient-to-r from-[#061D33] to-[#075985] px-4 py-12 text-white sm:py-16">
+        <div className="mx-auto max-w-7xl">
+          <p className="mb-2 text-sm font-semibold uppercase tracking-widest text-cyan-200">
+            WASA Jhang
+          </p>
+          <h1 className="text-3xl font-bold sm:text-4xl">
             Our Projects
           </h1>
-
-          <p className="mt-4 max-w-2xl text-base leading-7 text-slate-200 md:text-lg">
-            Explore development and improvement initiatives related to water
-            supply, sewerage and drainage services in Jhang.
+          <p className="mt-3 max-w-2xl text-sm leading-6 text-slate-200 sm:text-base">
+            View project photographs and available tender information for
+            WASA Jhang.
           </p>
         </div>
       </section>
 
-      {/* PROJECTS */}
-      <section className="bg-white px-6 py-12 md:py-16">
-        <div className="mx-auto max-w-7xl">
-          <div className="max-w-2xl">
-            <div className="flex items-center gap-3">
-              <span className="h-px w-8 bg-teal-600" />
-              <p className="text-xs font-bold uppercase tracking-[0.2em] text-teal-700">
-                Development &amp; Improvement
+      <section className="mx-auto max-w-7xl space-y-8 px-4 py-10 sm:py-12">
+        {projects.map((project) => (
+          <article
+            key={project.id}
+            className="overflow-hidden rounded-xl border border-slate-200 bg-white shadow-sm"
+          >
+            <div className="border-b border-slate-200 p-5 sm:p-6">
+              <h2 className="text-xl font-bold text-[#061D33] sm:text-2xl">
+                {project.title}
+              </h2>
+              <p className="mt-2 text-sm leading-6 text-slate-600 sm:text-base">
+                {project.description}
               </p>
             </div>
 
-            <h2 className="mt-3 text-3xl font-bold tracking-tight text-slate-900 md:text-4xl">
-              Current &amp; Planned Projects
-            </h2>
+            {project.photos && (
+              <div className="grid gap-4 p-5 sm:grid-cols-2 sm:p-6">
+                {project.photos.map((photo) => (
+                  <ProjectPhoto key={photo.src} photo={photo} />
+                ))}
+              </div>
+            )}
 
-            <p className="mt-3 text-sm leading-7 text-slate-600 md:text-base">
-              Key areas of infrastructure development and improvement related
-              to WASA Jhang services.
-            </p>
-          </div>
+            {project.groups && (
+              <div className="space-y-7 p-5 sm:p-6">
+                {project.groups.map((group) => (
+                  <section key={group.title}>
+                    <div className="mb-4 flex flex-wrap items-center justify-between gap-2">
+                      <h3 className="text-lg font-semibold text-[#073B5C]">
+                        {group.title}
+                      </h3>
 
-          <div className="mt-9 grid gap-6 lg:grid-cols-3">
-            {projects.map((project) => (
-              <article
-                key={project.number}
-                className="group overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-sm transition duration-300 hover:-translate-y-1 hover:border-sky-200 hover:shadow-xl"
-              >
-                {/* PROJECT IMAGE */}
-                <div className="relative h-56 overflow-hidden bg-slate-100">
-                  <img
-                    src={project.image}
-                    alt={project.title}
-                    className="h-full w-full object-cover transition duration-500 group-hover:scale-105"
-                  />
+                      {group.status && (
+                        <span className="rounded-full bg-amber-100 px-3 py-1 text-xs font-semibold text-amber-800">
+                          Status: {group.status}
+                        </span>
+                      )}
+                    </div>
 
-                  <div className="absolute inset-0 bg-gradient-to-t from-[#061D33]/75 via-[#061D33]/10 to-transparent" />
-
-                  <div className="absolute left-4 top-4 flex h-10 w-10 items-center justify-center rounded-lg bg-white/95 text-sm font-bold text-[#075985] shadow-md">
-                    {project.number}
-                  </div>
-
-                  <span
-                    className={`absolute right-4 top-4 rounded-full px-3 py-1 text-[10px] font-bold uppercase tracking-wider backdrop-blur-sm ${
-                      project.status === 'Ongoing'
-                        ? 'bg-teal-50/95 text-[#0F766E]'
-                        : 'bg-white/95 text-[#075985]'
-                    }`}
-                  >
-                    {project.status}
-                  </span>
-
-                  <div className="absolute bottom-4 left-4 right-4">
-                    <p className="text-xs font-semibold uppercase tracking-wider text-sky-100">
-                      WASA Jhang
-                    </p>
-                    <h3 className="mt-1 text-xl font-bold text-white">
-                      {project.title}
-                    </h3>
-                  </div>
-                </div>
-
-                {/* PROJECT CONTENT */}
-                <div className="p-6">
-                  <p className="text-sm leading-7 text-slate-600">
-                    {project.description}
-                  </p>
-
-                  <div className="mt-5 space-y-3 border-t border-slate-100 pt-4">
-                    {/* SUPERVISOR: HIDDEN ONLY FOR PROJECT 01 */}
-                    {project.number !== '01' && (
-                      <div className="flex items-start gap-3">
-                        <div className="flex h-16 w-16 shrink-0 items-center justify-center rounded-full border-2 border-dashed border-slate-300 bg-slate-50">
-                          <span className="text-xs font-medium text-slate-400">
-                            Photo
-                          </span>
-                        </div>
-
-                        <div className="pt-1">
-                          <p className="text-xs font-semibold uppercase tracking-wide text-slate-500">
-                            Project Supervisor
-                          </p>
-                          <p className="mt-1 text-sm font-semibold text-slate-800">
-                            {project.supervisor}
-                          </p>
-                        </div>
-                      </div>
+                    {group.description && (
+                      <p className="mb-4 text-sm leading-6 text-slate-600">
+                        {group.description}
+                      </p>
                     )}
 
-                    {/* PROJECT LOCATION */}
-                    <div className="flex items-start gap-3">
-                      <span className="text-lg">📍</span>
-                      <div className="pt-1">
-                        <p className="text-xs font-semibold uppercase tracking-wide text-slate-500">
-                          Project Location
-                        </p>
-                        <p className="mt-1 text-sm font-semibold text-slate-800">
-                          {project.location}
-                        </p>
-                      </div>
+                    <div className="grid gap-4 sm:grid-cols-2">
+                      {group.photos.map((photo) => (
+                        <ProjectPhoto key={photo.src} photo={photo} />
+                      ))}
                     </div>
-                  </div>
-
-                  <div className="mt-5 flex items-center gap-2 text-sm font-semibold text-[#075985]">
-                    Project Information
-                    <span className="transition-transform duration-200 group-hover:translate-x-1">
-                      →
-                    </span>
-                  </div>
-
-                  <div className="mt-5 h-0.5 w-full bg-slate-100">
-                    <div className="h-full w-0 bg-gradient-to-r from-[#075985] to-[#0F766E] transition-all duration-300 group-hover:w-full" />
-                  </div>
-                </div>
-              </article>
-            ))}
-          </div>
-
-          <div className="mt-8 rounded-xl border border-sky-100 bg-sky-50/60 px-5 py-4">
-            <p className="text-sm leading-6 text-slate-600">
-              Project information can be updated as official development
-              details, progress and public notices become available.
-            </p>
-          </div>
-        </div>
-      </section>
-
-      {/* CONTACT CTA */}
-      <section className="border-t border-slate-200 bg-slate-50 px-6 py-10 md:py-12">
-        <div className="mx-auto max-w-7xl">
-          <div className="rounded-2xl bg-gradient-to-r from-[#082F49] to-[#075985] px-6 py-8 shadow-lg md:px-8">
-            <div className="flex flex-col gap-5 md:flex-row md:items-center md:justify-between">
-              <div>
-                <p className="text-xs font-bold uppercase tracking-[0.2em] text-teal-200">
-                  Development Information
-                </p>
-
-                <h2 className="mt-2 text-2xl font-bold text-white">
-                  Need information about WASA projects?
-                </h2>
-
-                <p className="mt-2 text-sm leading-6 text-sky-100">
-                  Contact WASA Jhang for project information and public service
-                  inquiries.
-                </p>
+                  </section>
+                ))}
               </div>
+            )}
+          </article>
+        ))}
 
-              <Link
-                to="/contact"
-                className="w-fit rounded-lg bg-white px-5 py-2.5 text-sm font-bold text-[#082F49] shadow-md transition hover:-translate-y-0.5 hover:bg-sky-50"
-              >
-                Contact WASA Jhang →
-              </Link>
-            </div>
-          </div>
+        <div className="rounded-xl bg-[#073B5C] p-6 text-center text-white">
+          <h2 className="text-xl font-bold">
+            Need More Information?
+          </h2>
+          <p className="mt-2 text-sm leading-6 text-slate-200">
+            Contact WASA Jhang for project-related enquiries.
+          </p>
+          <Link
+            to="/contact"
+            className="mt-4 inline-flex rounded-lg bg-white px-5 py-3 text-sm font-semibold text-[#073B5C] transition hover:bg-slate-100"
+          >
+            Contact Us
+          </Link>
         </div>
+
+        <p className="text-xs leading-5 text-slate-500">
+          Photographs are displayed for project reference. Status is shown
+          only where confirmed.
+        </p>
       </section>
     </main>
   )

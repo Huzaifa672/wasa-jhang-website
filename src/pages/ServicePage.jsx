@@ -4,22 +4,16 @@ import externalServices from '../data/externalServices'
 
 function Services() {
   const onlineServices = [
+  
     {
-      icon: '💧',
-      title: 'New Domestic Connection',
+      icon: '🌊',
+      title: 'New Connection',
       description:
-        'Apply for a new domestic water connection through the official Punjab online service.',
+        'Apply for a new sewerage connection through the official Punjab online service.',
       label: 'Official Punjab Service',
       link: externalServices.domesticConnection.url,
     },
-    {
-      icon: '🏢',
-      title: 'New Commercial Connection',
-      description:
-        'Apply for a new commercial water connection through the official Punjab online service.',
-      label: 'Official Punjab Service',
-      link: externalServices.commercialConnection.url,
-    },
+
     {
       icon: '📝',
       title: 'Register a Complaint',
@@ -102,16 +96,16 @@ function Services() {
   ]
 
   const faqs = [
-    {
-      question: 'Where can I apply for a new water connection?',
-      answer:
-        'Use the official Domestic Water Connection or Commercial Water Connection service listed above.',
-    },
-    {
-      question: 'How can I register a water or sewerage complaint?',
-      answer:
-        'You can use the official complaint service or call the WASA helpline at 1334.',
-    },
+   {
+  question: 'Is water supply available through WASA Jhang?',
+  answer:
+    'Water supply is not currently available through WASA Jhang. Official updates will be shared when availability is confirmed.',
+},
+   {
+  question: 'How can I register a sewerage complaint?',
+  answer:
+    'You can register a sewerage-related complaint through the official complaint service or call the WASA helpline at 1334.',
+},
     {
       question: 'Where can I get a duplicate bill?',
       answer:
@@ -464,7 +458,7 @@ function Services() {
             </p>
           </div>
 
-          <div className="mt-8 grid gap-4 md:grid-cols-2">
+          <div className="mt-8 grid grid-cols-1 gap-4">
             {faqs.map((faq) => (
               <details
                 key={faq.question}

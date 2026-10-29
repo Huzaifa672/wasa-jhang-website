@@ -4,13 +4,20 @@ import { Link, NavLink } from 'react-router-dom'
 
 function Navbar() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
+  const [aboutDropdownOpen, setAboutDropdownOpen] = useState(false)
 
   const navLinks = [
     { name: 'Home', path: '/' },
-    { name: 'About Us', path: '/about' },
     { name: 'Services', path: '/services' },
     { name: 'Projects', path: '/projects' },
     { name: 'Notices', path: '/notices' },
+  ]
+
+  const aboutLinks = [
+    { name: 'About WASA Jhang', path: '/about' },
+    { name: 'Managing Director', path: '/managing-director' },
+    { name: 'Our Team', path: '/our-team' },
+    { name: 'Organization Structure', path: '/organization-structure' },
   ]
 
   const navLinkClass = ({ isActive }) =>
@@ -19,6 +26,11 @@ function Navbar() {
         ? 'text-blue-800'
         : 'text-slate-600 hover:text-blue-800'
     }`
+
+  const closeMenus = () => {
+    setMobileMenuOpen(false)
+    setAboutDropdownOpen(false)
+  }
 
   return (
     <header className="sticky top-0 z-50 bg-white shadow-[0_2px_12px_rgba(15,23,42,0.08)]">
@@ -63,9 +75,7 @@ function Navbar() {
                     Water Treatment Plant Upgrade — Coming Soon
                   </Link>
 
-                  <span aria-hidden="true" className="text-sky-200">
-                    ◆
-                  </span>
+                  <span aria-hidden="true" className="text-sky-200">◆</span>
 
                   <Link
                     to="/notices"
@@ -75,9 +85,7 @@ function Navbar() {
                     Latest Notices — View Announcements
                   </Link>
 
-                  <span aria-hidden="true" className="text-sky-200">
-                    ◆
-                  </span>
+                  <span aria-hidden="true" className="text-sky-200">◆</span>
 
                   <Link
                     to="/notices"
@@ -87,9 +95,7 @@ function Navbar() {
                     Tender Announcements — Visit Notices
                   </Link>
 
-                  <span aria-hidden="true" className="text-sky-200">
-                    ◆
-                  </span>
+                  <span aria-hidden="true" className="text-sky-200">◆</span>
 
                   <Link
                     to="/contact"
@@ -99,9 +105,7 @@ function Navbar() {
                     For Queries and Complaints, Contact WASA Jhang
                   </Link>
 
-                  <span aria-hidden="true" className="text-sky-200">
-                    ◆
-                  </span>
+                  <span aria-hidden="true" className="text-sky-200">◆</span>
                 </div>
               ))}
             </div>
@@ -116,9 +120,8 @@ function Navbar() {
           <Link
             to="/"
             className="flex items-center gap-3"
-            onClick={() => setMobileMenuOpen(false)}
+            onClick={closeMenus}
           >
-            {/* WASA Logo */}
             <div className="flex shrink-0 items-center justify-center">
               <img
                 src="/logo.jpg"
@@ -127,7 +130,6 @@ function Navbar() {
               />
             </div>
 
-            {/* Website Name */}
             <div>
               <h1 className="text-lg font-bold leading-tight text-[#082F49] md:text-xl">
                 WASA Jhang
@@ -140,11 +142,75 @@ function Navbar() {
 
           {/* Desktop Navigation */}
           <nav className="hidden items-center gap-6 md:flex">
-            {navLinks.map((link) => (
+            {navLinks.slice(0, 1).map((link) => (
               <NavLink
                 key={link.path}
                 to={link.path}
                 className={navLinkClass}
+                onClick={closeMenus}
+              >
+                {({ isActive }) => (
+                  <>
+                    {link.name}
+                    {isActive && (
+                      <span className="absolute -bottom-[17px] left-0 h-0.5 w-full rounded-full bg-gradient-to-r from-[#075985] to-[#0F766E]" />
+                    )}
+                  </>
+                )}
+              </NavLink>
+            ))}
+
+            {/* About Us Dropdown */}
+            <div className="relative">
+              <button
+                type="button"
+                onClick={() => setAboutDropdownOpen(!aboutDropdownOpen)}
+                className={`flex items-center gap-1 py-2 text-sm font-semibold transition ${
+                  aboutDropdownOpen
+                    ? 'text-blue-800'
+                    : 'text-slate-600 hover:text-blue-800'
+                }`}
+                aria-expanded={aboutDropdownOpen}
+              >
+                About Us
+                <svg
+                  className={`h-4 w-4 transition-transform ${
+                    aboutDropdownOpen ? 'rotate-180' : ''
+                  }`}
+                  viewBox="0 0 20 20"
+                  fill="currentColor"
+                  aria-hidden="true"
+                >
+                  <path
+                    fillRule="evenodd"
+                    d="M5.22 7.22a.75.75 0 011.06 0L10 10.94l3.72-3.72a.75.75 0 111.06 1.06l-4.25 4.25a.75.75 0 01-1.06 0L5.22 8.28a.75.75 0 010-1.06z"
+                    clipRule="evenodd"
+                  />
+                </svg>
+              </button>
+
+              {aboutDropdownOpen && (
+                <div className="absolute left-0 top-full z-50 mt-3 w-60 overflow-hidden rounded-lg border border-slate-200 bg-white py-2 shadow-xl">
+                  {aboutLinks.map((item) => (
+                    <Link
+                      key={item.path}
+                      to={item.path}
+                      onClick={closeMenus}
+                      className="block px-4 py-3 text-sm font-medium text-slate-700 transition hover:bg-sky-50 hover:text-[#075985]"
+                    >
+                      {item.name}
+                    </Link>
+                  ))}
+                </div>
+              )}
+            </div>
+
+            {navLinks.slice(1).map((link) => (
+              <NavLink
+                key={link.path}
+                to={link.path}
+                className={navLinkClass}
+                onClick={closeMenus}
               >
                 {({ isActive }) => (
                   <>
@@ -160,6 +226,7 @@ function Navbar() {
             {/* Contact Button */}
             <NavLink
               to="/contact"
+              onClick={closeMenus}
               className={({ isActive }) =>
                 `rounded-md px-4 py-2 text-sm font-semibold shadow-sm transition ${
                   isActive
@@ -175,7 +242,10 @@ function Navbar() {
           {/* Mobile Menu Button */}
           <button
             type="button"
-            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+            onClick={() => {
+              setMobileMenuOpen(!mobileMenuOpen)
+              setAboutDropdownOpen(false)
+            }}
             className="rounded-md border border-slate-200 p-2 text-slate-700 transition hover:border-blue-200 hover:bg-sky-50 hover:text-blue-800 md:hidden"
             aria-label="Toggle navigation menu"
             aria-expanded={mobileMenuOpen}
@@ -219,11 +289,67 @@ function Navbar() {
       {mobileMenuOpen && (
         <div className="border-b border-slate-200 bg-white px-6 py-3 shadow-sm md:hidden">
           <nav className="mx-auto flex max-w-7xl flex-col">
-            {navLinks.map((link) => (
+            {navLinks.slice(0, 1).map((link) => (
               <NavLink
                 key={link.path}
                 to={link.path}
-                onClick={() => setMobileMenuOpen(false)}
+                onClick={closeMenus}
+                className={({ isActive }) =>
+                  `border-b border-slate-100 py-3 text-sm font-semibold transition ${
+                    isActive
+                      ? 'text-blue-800'
+                      : 'text-slate-600 hover:text-blue-800'
+                  }`
+                }
+              >
+                {link.name}
+              </NavLink>
+            ))}
+
+            {/* Mobile About Us Dropdown */}
+            <button
+              type="button"
+              onClick={() => setAboutDropdownOpen(!aboutDropdownOpen)}
+              className="flex items-center justify-between border-b border-slate-100 py-3 text-left text-sm font-semibold text-slate-700"
+              aria-expanded={aboutDropdownOpen}
+            >
+              About Us
+              <svg
+                className={`h-4 w-4 transition-transform ${
+                  aboutDropdownOpen ? 'rotate-180' : ''
+                }`}
+                viewBox="0 0 20 20"
+                fill="currentColor"
+                aria-hidden="true"
+              >
+                <path
+                  fillRule="evenodd"
+                  d="M5.22 7.22a.75.75 0 011.06 0L10 10.94l3.72-3.72a.75.75 0 111.06 1.06l-4.25 4.25a.75.75 0 01-1.06 0L5.22 8.28a.75.75 0 010-1.06z"
+                  clipRule="evenodd"
+                />
+              </svg>
+            </button>
+
+            {aboutDropdownOpen && (
+              <div className="border-b border-slate-100 bg-slate-50 py-1 pl-4">
+                {aboutLinks.map((item) => (
+                  <Link
+                    key={item.path}
+                    to={item.path}
+                    onClick={closeMenus}
+                    className="block py-2.5 text-sm text-slate-600 transition hover:text-[#075985]"
+                  >
+                    {item.name}
+                  </Link>
+                ))}
+              </div>
+            )}
+
+            {navLinks.slice(1).map((link) => (
+              <NavLink
+                key={link.path}
+                to={link.path}
+                onClick={closeMenus}
                 className={({ isActive }) =>
                   `border-b border-slate-100 py-3 text-sm font-semibold transition ${
                     isActive
@@ -238,7 +364,7 @@ function Navbar() {
 
             <NavLink
               to="/contact"
-              onClick={() => setMobileMenuOpen(false)}
+              onClick={closeMenus}
               className={({ isActive }) =>
                 `mt-3 rounded-md px-4 py-2.5 text-center text-sm font-semibold transition ${
                   isActive

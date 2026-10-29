@@ -30,10 +30,10 @@ function FooterTest() {
             </div>
 
             <p className="mt-4 max-w-sm text-sm leading-6 text-slate-400">
-              Providing information and public services related to
-              water supply, sewerage, sanitation and infrastructure
-              for the citizens of Jhang.
-            </p>
+  Providing information and public services related to
+  sewerage, drainage, sanitation and infrastructure
+  for the citizens of Jhang.
+</p>
 
             <div className="mt-4 inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/[0.04] px-3 py-1.5 text-xs text-slate-300">
               <span className="h-2 w-2 rounded-full bg-teal-300" />
@@ -48,12 +48,7 @@ function FooterTest() {
             </h3>
 
             <div className="mt-5 flex flex-col gap-3 text-sm">
-              <Link
-                to="/services"
-                className="transition hover:translate-x-1 hover:text-white"
-              >
-                Water Supply
-              </Link>
+              
 
               <Link
                 to="/services"
@@ -114,20 +109,20 @@ function FooterTest() {
   </div>
 </div>
 
+
 {/* Contact Information */}
 <div>
   <h3 className="border-l-2 border-[#0EA5A4] pl-3 text-sm font-semibold uppercase tracking-wide text-white">
     Contact Information
   </h3>
 
-  <div className="mt-5 space-y-3 text-sm">
+  <div className="mt-5 space-y-4 text-sm">
     <div>
       <p className="font-medium text-slate-200">
         Office
       </p>
-
       <p className="mt-1 leading-6 text-slate-400">
-        WASA Jhang, Punjab, Pakistan
+        Kachery Road, Jhang Sadar, Punjab, Pakistan
       </p>
     </div>
 
@@ -135,20 +130,38 @@ function FooterTest() {
       <p className="font-medium text-slate-200">
         Phone
       </p>
-
-      <p className="mt-1 text-slate-400">
-        Contact office for assistance
-      </p>
+      <a
+        href="tel:+923178600047"
+        className="mt-1 inline-block text-slate-400 transition hover:text-white"
+      >
+        +92 317 8600047
+      </a>
     </div>
 
     <div>
       <p className="font-medium text-slate-200">
         Email
       </p>
+      <a
+        href="mailto:wasajhang@gmail.com"
+        className="mt-1 inline-block break-all text-slate-400 transition hover:text-white"
+      >
+        wasajhang@gmail.com
+      </a>
+    </div>
 
-      <p className="mt-1 text-slate-400">
-        Official contact information
+    <div>
+      <p className="font-medium text-slate-200">
+        Facebook
       </p>
+      <a
+        href="https://www.facebook.com/wasajhang"
+        target="_blank"
+        rel="noopener noreferrer"
+        className="mt-1 inline-block text-slate-400 transition hover:text-white"
+      >
+        Official Facebook Page ↗
+      </a>
     </div>
 
     <Link
@@ -156,9 +169,10 @@ function FooterTest() {
       className="inline-flex rounded-md bg-[#075985] px-4 py-2 text-xs font-semibold text-white transition hover:bg-[#0F766E]"
     >
       Contact WASA Jhang →
-   </Link>
-   </div>
-   </div>
+    </Link>
+  </div>
+</div>
+
   </div>
         {/* Bottom Bar */}
       <div className="border-t border-white/10 bg-[#061D33]">
