@@ -346,9 +346,7 @@ function Home() {
         Civil works at disposal stations under WASA Jhang.
       </p>
       
-<p className="mt-3 text-xs font-semibold text-amber-700">
-  Status: Ongoing
-</p>
+
 
     </div>
   </Link>

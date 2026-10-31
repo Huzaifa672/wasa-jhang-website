@@ -100,10 +100,18 @@ function FooterTest() {
       About WASA Jhang
     </Link>
 
+<Link
+  to="/admin"
+  className="transition hover:translate-x-1 hover:text-white"
+>
+  Admin Login
+</Link>
+
     <Link
       to="/contact"
       className="transition hover:translate-x-1 hover:text-white"
     >
+      
       Contact &amp; Support
     </Link>
   </div>
@@ -170,6 +178,7 @@ function FooterTest() {
     >
       Contact WASA Jhang →
     </Link>
+    
   </div>
 </div>
 

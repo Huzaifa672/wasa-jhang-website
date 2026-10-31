@@ -1,10 +1,27 @@
 
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { Link, NavLink } from 'react-router-dom'
+import { supabase } from '../lib/supabase'
+
+function SocialIcon({ href, label, children }) {
+  return (
+    <a
+      href={href}
+      target="_blank"
+      rel="noopener noreferrer"
+      aria-label={label}
+      title={label}
+      className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full text-white transition hover:bg-white/15 hover:text-sky-200"
+    >
+      {children}
+    </a>
+  )
+}
 
 function Navbar() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
   const [aboutDropdownOpen, setAboutDropdownOpen] = useState(false)
+  const [announcements, setAnnouncements] = useState([])
 
   const navLinks = [
     { name: 'Home', path: '/' },
@@ -32,17 +49,113 @@ function Navbar() {
     setAboutDropdownOpen(false)
   }
 
+  // Load published notices for the announcement bar
+  useEffect(() => {
+    let active = true
+
+    async function loadAnnouncements() {
+      try {
+        const { data, error } = await supabase
+          .from('website_content')
+          .select('id, title, category, notice_date, published_at')
+          .eq('content_type', 'notice')
+          .eq('is_published', true)
+          .eq('is_archived', false)
+          .order('notice_date', {
+            ascending: false,
+            nullsFirst: false,
+          })
+          .order('published_at', {
+            ascending: false,
+            nullsFirst: false,
+          })
+
+        if (error) throw error
+
+        if (active) {
+          setAnnouncements(data || [])
+        }
+      } catch (err) {
+        if (active) {
+          setAnnouncements([])
+        }
+      }
+    }
+
+    loadAnnouncements()
+
+    return () => {
+      active = false
+    }
+  }, [])
+
   return (
     <header className="sticky top-0 z-50 bg-white shadow-[0_2px_12px_rgba(15,23,42,0.08)]">
+
       {/* Government Top Bar */}
-      <div className="bg-[#082F49] px-6 py-1.5 text-xs text-white">
-        <div className="mx-auto flex max-w-7xl items-center justify-between">
-          <span className="font-medium tracking-wide">
-            Government of Punjab
+      <div className="bg-[#082F49] px-3 py-2 text-white sm:px-6">
+        <div className="mx-auto flex max-w-7xl items-center justify-between gap-2">
+
+          <span className="shrink-0 text-[10px] font-medium tracking-wide sm:text-xs">
+            Government of the Punjab
           </span>
-          <span className="hidden text-sky-200 sm:block">
-            Water & Sanitation Agency Jhang
-          </span>
+
+          <div className="flex min-w-0 items-center justify-end gap-2 sm:gap-3">
+
+            {/* Social Media Icons */}
+            <div className="flex shrink-0 items-center gap-1 sm:gap-2">
+
+              {/* WASA Jhang Facebook */}
+              <SocialIcon
+                href="https://www.facebook.com/wasajhang"
+                label="WASA Jhang on Facebook"
+              >
+                <svg viewBox="0 0 24 24" className="h-4 w-4" fill="currentColor" aria-hidden="true">
+                  <path d="M13.5 21v-8h2.7l.4-3.1h-3.1v-2c0-.9.3-1.5 1.6-1.5h1.7V3.6c-.3 0-1.3-.1-2.5-.1-2.5 0-4.2 1.5-4.2 4.3v2.1H7.3V13h2.8v8h3.4Z" />
+                </svg>
+              </SocialIcon>
+
+              {/* WASA Jhang Instagram */}
+              <SocialIcon
+                href="https://www.instagram.com/wasajhang/?hl=en"
+                label="WASA Jhang on Instagram"
+              >
+                <svg viewBox="0 0 24 24" className="h-4 w-4" fill="none" stroke="currentColor" strokeWidth="1.8" aria-hidden="true">
+                  <rect x="3" y="3" width="18" height="18" rx="5" />
+                  <circle cx="12" cy="12" r="4" />
+                  <circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none" />
+                </svg>
+              </SocialIcon>
+
+              {/* Punjab WASA LinkedIn */}
+              <SocialIcon
+               href="https://www.linkedin.com/in/wasa-jhang-012a93396/"
+  label="LinkedIn"
+              >
+                <svg viewBox="0 0 24 24" className="h-4 w-4" fill="currentColor" aria-hidden="true">
+                  <path d="M5.2 3.5a1.9 1.9 0 1 0 0 3.8 1.9 1.9 0 0 0 0-3.8ZM3.6 9h3.2v11.4H3.6V9Zm5.2 0h3.1v1.6h.1a3.4 3.4 0 0 1 3.1-1.9c3.3 0 3.9 2.2 3.9 5v6.7h-3.2v-5.9c0-1.4 0-3.1-1.9-3.1s-2.1 1.5-2.1 3v6H8.8V9Z" />
+                </svg>
+              </SocialIcon>
+
+              {/* Punjab WASA X */}
+              <SocialIcon
+                 href="https://x.com/wasajhang"
+  label="X"
+              >
+                <svg viewBox="0 0 24 24" className="h-4 w-4" fill="currentColor" aria-hidden="true">
+                  <path d="M18.9 2H22l-6.8 7.8L23.2 22h-6.3L12 13.9 4.9 22H1.8l7.3-8.4L.8 2h6.5l4.5 7.5L18.9 2Zm-1.1 18h1.7L6.3 3.9H4.5L17.8 20Z" />
+                </svg>
+              </SocialIcon>
+            </div>
+
+            <span className="h-4 w-px shrink-0 bg-white/40" aria-hidden="true" />
+
+            {/* Agency Name */}
+            <span className="min-w-0 text-right text-[9px] font-medium leading-tight text-sky-100 sm:text-xs">
+              Water and Sanitation Agency (WASA) Jhang
+            </span>
+
+          </div>
         </div>
       </div>
 
@@ -52,63 +165,56 @@ function Navbar() {
         aria-label="Public announcements"
       >
         <div className="flex h-10 items-center">
+
           <div className="z-10 flex h-full shrink-0 items-center gap-2 bg-[#061D33] px-3 sm:px-5">
             <span aria-hidden="true">📢</span>
+
             <span className="text-[10px] font-bold uppercase tracking-wider sm:text-xs">
               Announcements
             </span>
           </div>
 
           <div className="min-w-0 flex-1 overflow-hidden">
-            <div className="announcement-track flex w-max items-center">
-              {[1, 2].map((copy) => (
-                <div
-                  key={copy}
-                  aria-hidden={copy === 2}
-                  className="flex shrink-0 items-center gap-8 pr-8 text-xs font-medium sm:text-sm"
-                >
-                  <Link
-                    to="/projects"
-                    tabIndex={copy === 2 ? -1 : 0}
-                    className="whitespace-nowrap transition hover:text-sky-200 hover:underline"
+            {announcements.length > 0 ? (
+              <div className="announcement-track flex w-max items-center">
+
+                {[1, 2].map((copy) => (
+                  <div
+                    key={copy}
+                    aria-hidden={copy === 2}
+                    className="flex shrink-0 items-center gap-8 pr-8 text-xs font-medium sm:text-sm"
                   >
-                    Water Treatment Plant Upgrade — Coming Soon
-                  </Link>
+                    {announcements.map((notice) => (
+                      <div
+                        key={`${copy}-${notice.id}`}
+                        className="flex shrink-0 items-center gap-8"
+                      >
+                        <Link
+                          to="/notices"
+                          tabIndex={copy === 2 ? -1 : 0}
+                          className="whitespace-nowrap transition hover:text-sky-200 hover:underline"
+                        >
+                          {notice.category === 'Tender' ? '📄' : '📢'}{' '}
+                          {notice.title}
+                        </Link>
 
-                  <span aria-hidden="true" className="text-sky-200">◆</span>
+                        <span
+                          aria-hidden="true"
+                          className="text-sky-200"
+                        >
+                          ◆
+                        </span>
+                      </div>
+                    ))}
+                  </div>
+                ))}
 
-                  <Link
-                    to="/notices"
-                    tabIndex={copy === 2 ? -1 : 0}
-                    className="whitespace-nowrap transition hover:text-sky-200 hover:underline"
-                  >
-                    Latest Notices — View Announcements
-                  </Link>
-
-                  <span aria-hidden="true" className="text-sky-200">◆</span>
-
-                  <Link
-                    to="/notices"
-                    tabIndex={copy === 2 ? -1 : 0}
-                    className="whitespace-nowrap transition hover:text-sky-200 hover:underline"
-                  >
-                    Tender Announcements — Visit Notices
-                  </Link>
-
-                  <span aria-hidden="true" className="text-sky-200">◆</span>
-
-                  <Link
-                    to="/contact"
-                    tabIndex={copy === 2 ? -1 : 0}
-                    className="whitespace-nowrap transition hover:text-sky-200 hover:underline"
-                  >
-                    For Queries and Complaints, Contact WASA Jhang
-                  </Link>
-
-                  <span aria-hidden="true" className="text-sky-200">◆</span>
-                </div>
-              ))}
-            </div>
+              </div>
+            ) : (
+              <div className="px-4 text-xs font-medium sm:text-sm">
+                No new announcements at the moment.
+              </div>
+            )}
           </div>
         </div>
       </section>
@@ -116,6 +222,7 @@ function Navbar() {
       {/* Main Header */}
       <div className="border-b border-slate-100 bg-white">
         <div className="mx-auto flex max-w-7xl items-center justify-between px-6 py-3">
+
           {/* Branding */}
           <Link
             to="/"
@@ -134,6 +241,7 @@ function Navbar() {
               <h1 className="text-lg font-bold leading-tight text-[#082F49] md:text-xl">
                 WASA Jhang
               </h1>
+
               <p className="text-[11px] font-medium text-slate-500 md:text-xs">
                 Water & Sanitation Agency
               </p>
@@ -142,6 +250,7 @@ function Navbar() {
 
           {/* Desktop Navigation */}
           <nav className="hidden items-center gap-6 md:flex">
+
             {navLinks.slice(0, 1).map((link) => (
               <NavLink
                 key={link.path}
@@ -152,6 +261,7 @@ function Navbar() {
                 {({ isActive }) => (
                   <>
                     {link.name}
+
                     {isActive && (
                       <span className="absolute -bottom-[17px] left-0 h-0.5 w-full rounded-full bg-gradient-to-r from-[#075985] to-[#0F766E]" />
                     )}
@@ -173,6 +283,7 @@ function Navbar() {
                 aria-expanded={aboutDropdownOpen}
               >
                 About Us
+
                 <svg
                   className={`h-4 w-4 transition-transform ${
                     aboutDropdownOpen ? 'rotate-180' : ''
@@ -215,6 +326,7 @@ function Navbar() {
                 {({ isActive }) => (
                   <>
                     {link.name}
+
                     {isActive && (
                       <span className="absolute -bottom-[17px] left-0 h-0.5 w-full rounded-full bg-gradient-to-r from-[#075985] to-[#0F766E]" />
                     )}
@@ -289,6 +401,7 @@ function Navbar() {
       {mobileMenuOpen && (
         <div className="border-b border-slate-200 bg-white px-6 py-3 shadow-sm md:hidden">
           <nav className="mx-auto flex max-w-7xl flex-col">
+
             {navLinks.slice(0, 1).map((link) => (
               <NavLink
                 key={link.path}
@@ -314,6 +427,7 @@ function Navbar() {
               aria-expanded={aboutDropdownOpen}
             >
               About Us
+
               <svg
                 className={`h-4 w-4 transition-transform ${
                   aboutDropdownOpen ? 'rotate-180' : ''
@@ -378,6 +492,7 @@ function Navbar() {
           </nav>
         </div>
       )}
+
     </header>
   )
 }

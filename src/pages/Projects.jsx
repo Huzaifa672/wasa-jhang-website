@@ -28,7 +28,6 @@ const projects = [
     groups: [
       {
         title: 'Boundary Wall & Generator Room',
-        status: 'Ongoing',
         photos: [
           {
             src: '/projects/boundary-generator-before.jpeg',
@@ -37,7 +36,7 @@ const projects = [
           },
           {
             src: '/projects/boundary-generator-after.jpeg',
-            alt: 'Boundary wall and generator room during ongoing work',
+            alt: 'Boundary wall and generator room during work',
             label: 'After',
           },
         ],
@@ -124,16 +123,10 @@ function Projects() {
               <div className="space-y-7 p-5 sm:p-6">
                 {project.groups.map((group) => (
                   <section key={group.title}>
-                    <div className="mb-4 flex flex-wrap items-center justify-between gap-2">
+                    <div className="mb-4">
                       <h3 className="text-lg font-semibold text-[#073B5C]">
                         {group.title}
                       </h3>
-
-                      {group.status && (
-                        <span className="rounded-full bg-amber-100 px-3 py-1 text-xs font-semibold text-amber-800">
-                          Status: {group.status}
-                        </span>
-                      )}
                     </div>
 
                     {group.description && (
@@ -170,8 +163,7 @@ function Projects() {
         </div>
 
         <p className="text-xs leading-5 text-slate-500">
-          Photographs are displayed for project reference. Status is shown
-          only where confirmed.
+          Photographs are displayed for project reference.
         </p>
       </section>
     </main>

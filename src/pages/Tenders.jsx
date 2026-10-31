@@ -1,3 +1,4 @@
+
 import { useEffect, useState } from 'react';
 import { supabase } from '../lib/supabase';
 
@@ -22,7 +23,7 @@ function Tenders() {
         const { data, error: fetchError } = await supabase
           .from('tenders')
           .select(
-            'id, title, category, summary, description, estimated_cost, bid_security, publication_date, submission_deadline, opening_datetime, document_url, status'
+            'id, title, category, summary, description, estimated_cost, bid_security, publication_date, submission_deadline, completion_date, opening_datetime, document_url, status'
           )
           .eq('status', 'published')
           .order('publication_date', {
@@ -100,11 +101,11 @@ function Tenders() {
         .createSignedUrl(tender.document_url, 300);
 
       if (signedUrlError) throw signedUrlError;
+
       if (!data?.signedUrl) {
         throw new Error('Could not create a document link.');
       }
 
-      // Open the link after the user clicks the document button.
       window.location.assign(data.signedUrl);
     } catch (err) {
       console.error('Error opening tender document:', err);
@@ -260,6 +261,13 @@ function Tenders() {
                           Submission deadline:{' '}
                           {formatDate(tender.submission_deadline, true)}
                         </span>
+
+                        {tender.completion_date && (
+                          <span className="mt-1 block text-sm font-semibold text-slate-700">
+                            Completion Date:{' '}
+                            {formatDate(tender.completion_date)}
+                          </span>
+                        )}
                       </span>
 
                       <svg
@@ -323,6 +331,17 @@ function Tenders() {
                               </p>
                               <p className="mt-1 text-sm font-semibold text-slate-800">
                                 {formatAmount(tender.bid_security)}
+                              </p>
+                            </div>
+                          )}
+
+                          {tender.completion_date && (
+                            <div className="rounded-lg border border-slate-200 bg-white p-4">
+                              <p className="text-xs font-semibold uppercase tracking-wide text-slate-500">
+                                Completion Date
+                              </p>
+                              <p className="mt-1 text-sm font-semibold text-slate-800">
+                                {formatDate(tender.completion_date)}
                               </p>
                             </div>
                           )}

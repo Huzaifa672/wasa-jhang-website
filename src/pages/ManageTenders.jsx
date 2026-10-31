@@ -14,6 +14,7 @@ const EMPTY_FORM = {
   bid_security: '',
   publication_date: '',
   submission_deadline: '',
+  completion_date: '',
   opening_datetime: '',
   status: 'draft',
 };
@@ -24,6 +25,17 @@ function toLocalDateTime(value) {
   if (Number.isNaN(date.getTime())) return '';
   const local = new Date(date.getTime() - date.getTimezoneOffset() * 60000);
   return local.toISOString().slice(0, 16);
+}
+
+function formatDate(value) {
+  if (!value) return '';
+  const date = new Date(`${value}T00:00:00`);
+  if (Number.isNaN(date.getTime())) return '';
+  return date.toLocaleDateString('en-GB', {
+    day: '2-digit',
+    month: 'long',
+    year: 'numeric',
+  });
 }
 
 function ManageTenders() {
@@ -133,6 +145,7 @@ function ManageTenders() {
       bid_security: tender.bid_security ?? '',
       publication_date: tender.publication_date || '',
       submission_deadline: toLocalDateTime(tender.submission_deadline),
+      completion_date: tender.completion_date || '',
       opening_datetime: toLocalDateTime(tender.opening_datetime),
       status: tender.status || 'draft',
     });
@@ -207,6 +220,7 @@ function ManageTenders() {
         submission_deadline: form.submission_deadline
           ? new Date(form.submission_deadline).toISOString()
           : null,
+        completion_date: form.completion_date || null,
         opening_datetime: form.opening_datetime
           ? new Date(form.opening_datetime).toISOString()
           : null,
@@ -234,9 +248,12 @@ function ManageTenders() {
 
       if (result.error) throw result.error;
 
-      setMessage(editingId ? 'Tender updated successfully.' : 'Tender created successfully.');
+      const successMessage = editingId
+        ? 'Tender updated successfully.'
+        : 'Tender created successfully.';
+
       resetForm();
-      setMessage(editingId ? 'Tender updated successfully.' : 'Tender created successfully.');
+      setMessage(successMessage);
       setLoading(true);
       await loadTenders();
     } catch (submitError) {
@@ -293,8 +310,6 @@ function ManageTenders() {
       return;
     }
 
-    // Open the tab immediately during the click. Opening it only after the
-    // Supabase request finishes can be blocked by the browser's popup blocker.
     const pdfWindow = window.open('about:blank', '_blank');
 
     if (!pdfWindow) {
@@ -432,6 +447,11 @@ function ManageTenders() {
             </label>
 
             <label className="text-sm font-semibold text-slate-700">
+              Completion date
+              <input type="date" name="completion_date" value={form.completion_date} onChange={updateField} className="mt-2 w-full rounded-lg border border-slate-300 px-3 py-2.5 font-normal" />
+            </label>
+
+            <label className="text-sm font-semibold text-slate-700">
               Bid opening date/time
               <input type="datetime-local" name="opening_datetime" value={form.opening_datetime} onChange={updateField} className="mt-2 w-full rounded-lg border border-slate-300 px-3 py-2.5 font-normal" />
             </label>
@@ -533,9 +553,16 @@ function ManageTenders() {
                       </span>
                       <h3 className="mt-3 break-words font-bold text-slate-900">{tender.title}</h3>
                       <p className="mt-1 text-sm text-slate-600">{tender.category || 'Uncategorised'}</p>
+
                       {tender.submission_deadline && (
                         <p className="mt-2 text-sm text-slate-600">
                           Deadline: {new Date(tender.submission_deadline).toLocaleString()}
+                        </p>
+                      )}
+
+                      {tender.completion_date && (
+                        <p className="mt-1 text-sm font-semibold text-teal-700">
+                          Completion Date: {formatDate(tender.completion_date)}
                         </p>
                       )}
                     </div>

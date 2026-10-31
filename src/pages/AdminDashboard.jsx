@@ -231,8 +231,8 @@ export default function AdminDashboard() {
               </div>
 
               <h3 className="mt-5 text-xl font-bold text-slate-900">
-                Notices &amp; Tenders
-              </h3>
+  Notices &amp; Announcements
+</h3>
 
               <p className="mt-2 flex-1 text-sm leading-6 text-slate-600">
                 Create, edit, publish, archive or delete public notices and tender announcements from one place.

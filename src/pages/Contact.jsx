@@ -1,18 +1,26 @@
+
 import { Link } from 'react-router-dom'
 
 function Contact() {
+ const officeAddress =
+  'Kachehry Road, Jhang Sadar Civil Lines, Jhang Sadar, Pakistan, 35200'
+
+const mapUrl =
+  'https://www.google.com/maps/place/WASA+Jhang/@31.2693444,72.3219953,17z'
+
+const mapEmbedUrl =
+  'https://maps.google.com/maps?q=31.2693398,72.3245702&z=17&output=embed'
+
   return (
     <main className="min-h-screen bg-slate-50">
       {/* PAGE HEADER */}
       <section className="relative overflow-hidden bg-gradient-to-br from-[#061D33] via-[#073B5C] to-[#075985] px-6 py-12 text-white md:py-14">
         <div className="absolute -right-24 -top-24 h-72 w-72 rounded-full border border-white/10" />
-
         <div className="absolute -bottom-32 left-10 h-64 w-64 rounded-full bg-teal-300/10 blur-3xl" />
 
         <div className="relative mx-auto max-w-7xl">
           <div className="flex items-center gap-3">
             <span className="h-px w-10 bg-teal-300" />
-
             <p className="text-xs font-bold uppercase tracking-[0.2em] text-sky-200">
               WASA Jhang
             </p>
@@ -36,7 +44,6 @@ function Contact() {
             <div>
               <div className="flex items-center gap-3">
                 <span className="h-px w-8 bg-teal-600" />
-
                 <p className="text-xs font-bold uppercase tracking-[0.2em] text-teal-700">
                   Get In Touch
                 </p>
@@ -73,14 +80,44 @@ function Contact() {
                       </svg>
                     </div>
 
-                    <div>
+                    <div className="min-w-0">
                       <h3 className="font-bold text-slate-900">
                         WASA Jhang Office
                       </h3>
 
-                      <p className="mt-1 text-sm leading-6 text-slate-600">
-                        Jhang, Punjab, Pakistan
+                      <p className="mt-2 text-sm leading-6 text-slate-600">
+                        {officeAddress}
                       </p>
+
+                      <a
+                        href={mapUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="mt-2 inline-block text-sm font-bold text-[#075985] hover:text-[#0F766E]"
+                      >
+                        View on Google Maps →
+                      </a>
+
+                      <div className="mt-3 space-y-1 text-sm text-slate-600">
+                        <p>
+                          <span className="font-semibold text-slate-800">
+                            Email:
+                          </span>{' '}
+                          <a
+                            href="mailto:wasajhang@gmail.com"
+                            className="text-[#075985] hover:underline"
+                          >
+                            wasajhang@gmail.com
+                          </a>
+                        </p>
+
+                        <p>
+                          <span className="font-semibold text-slate-800">
+                            Office Hours:
+                          </span>{' '}
+                          Monday–Saturday, 9:00 AM–5:00 PM
+                        </p>
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -234,8 +271,54 @@ function Contact() {
         </div>
       </section>
 
+      {/* OFFICE LOCATION MAP */}
+      <section className="border-t border-slate-200 bg-slate-50 px-6 py-12 md:py-16">
+        <div className="mx-auto max-w-7xl">
+          <div className="flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between">
+            <div>
+              <div className="flex items-center gap-3">
+                <span className="h-px w-8 bg-teal-600" />
+                <p className="text-xs font-bold uppercase tracking-[0.2em] text-teal-700">
+                  Find Our Office
+                </p>
+              </div>
+
+              <h2 className="mt-3 text-3xl font-bold tracking-tight text-slate-900">
+                Office Location Map
+              </h2>
+
+              <p className="mt-2 max-w-2xl text-sm leading-6 text-slate-600">
+                {officeAddress}
+              </p>
+            </div>
+
+            <a
+              href={mapUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="w-fit rounded-lg bg-[#075985] px-5 py-3 text-sm font-bold text-white transition hover:bg-[#064E73]"
+            >
+              Get Directions →
+            </a>
+          </div>
+
+          <div className="mt-6 overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-sm">
+            <iframe
+              title="WASA Jhang Office Location Map"
+              src={mapEmbedUrl}
+              width="100%"
+              height="420"
+              style={{ border: 0 }}
+              loading="lazy"
+              referrerPolicy="no-referrer-when-downgrade"
+              allowFullScreen
+            />
+          </div>
+        </div>
+      </section>
+
       {/* BOTTOM CTA */}
-      <section className="border-t border-slate-200 bg-slate-50 px-6 py-10 md:py-12">
+      <section className="border-t border-slate-200 bg-white px-6 py-10 md:py-12">
         <div className="mx-auto max-w-7xl">
           <div className="rounded-2xl bg-gradient-to-r from-[#082F49] to-[#075985] px-6 py-8 shadow-lg md:px-8">
             <div className="flex flex-col gap-5 md:flex-row md:items-center md:justify-between">
